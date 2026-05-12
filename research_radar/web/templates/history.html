@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Digest history</h1>
+</section>
+{% if digests %}
+<table>
+  <thead>
+    <tr><th>Generated</th><th>Type</th><th>Title</th><th>Items</th><th>Email</th></tr>
+  </thead>
+  <tbody>
+    {% for digest in digests %}
+    <tr>
+      <td>{{ digest.generated_at.strftime("%Y-%m-%d %H:%M") }}</td>
+      <td>{{ digest.digest_type }}</td>
+      <td><a href="/digests/{{ digest.id }}">{{ digest.title }}</a></td>
+      <td>{{ digest.item_count }}</td>
+      <td>{% if digest.email_sent_at %}sent{% else %}not sent{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No digests yet.</p>
+{% endif %}
+{% endblock %}

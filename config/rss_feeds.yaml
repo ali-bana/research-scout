@@ -1,0 +1,5 @@
+feeds:
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+  - name: "OpenAI Blog"
+    url: "https://openai.com/news/rss.xml"

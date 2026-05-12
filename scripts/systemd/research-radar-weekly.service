@@ -1,0 +1,8 @@
+[Unit]
+Description=Research Radar weekly discovery
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Desktop/codes/research-scout
+EnvironmentFile=%h/Desktop/codes/research-scout/.env
+ExecStart=%h/Desktop/codes/research-scout/env/bin/research-radar discover-weekly

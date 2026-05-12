@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Papers</h1>
+  <form method="get" action="/papers" class="search">
+    <input name="q" value="{{ q }}" placeholder="Search title, abstract, authors">
+    <button class="button" type="submit">Search</button>
+  </form>
+</section>
+
+<section class="paper-list">
+  {% for paper in papers %}
+  <article class="paper-card">
+    <div class="paper-meta">{{ paper.source }} · {{ paper.published_at.strftime("%Y-%m-%d") if paper.published_at else "no date" }} · Score {{ "%.2f"|format(paper.final_score) }}</div>
+    <h2><a href="{{ paper.url }}" target="_blank" rel="noreferrer">{{ paper.title }}</a></h2>
+    <p class="authors">{{ paper.authors }}</p>
+    {% if paper.llm_selection_reason or paper.selection_reason %}
+    <p class="reason">{{ paper.llm_selection_reason or paper.selection_reason }}</p>
+    {% endif %}
+    <p>{{ paper.abstract[:700] }}{% if paper.abstract|length > 700 %}...{% endif %}</p>
+  </article>
+  {% else %}
+  <p>No papers match this filter.</p>
+  {% endfor %}
+</section>
+{% endblock %}

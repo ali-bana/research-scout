@@ -1,0 +1,33 @@
+current_projects:
+  - "tool-using agents for long-horizon research workflows"
+  - "retrieval-augmented reasoning systems"
+  - "evaluation harnesses for AI research assistants"
+high_priority_topics:
+  - "agents"
+  - "tool use"
+  - "long-context"
+  - "retrieval"
+  - "reasoning"
+  - "post-training"
+  - "evaluation"
+broader_watchlist:
+  - "multimodal models"
+  - "alignment"
+  - "benchmark design"
+  - "scientific discovery"
+  - "AI coding agents"
+negative_topics:
+  - "cryptocurrency trading"
+  - "medical diagnosis without validation"
+  - "adversarial spam"
+seed_papers_i_like:
+  - title: "ReAct: Synergizing Reasoning and Acting in Language Models"
+    note: "Good example of tool-use plus reasoning."
+  - title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+    note: "Core retrieval-augmented generation reference."
+authors_labs_to_watch:
+  - "Stanford CRFM"
+  - "Berkeley AI Research"
+  - "OpenAI"
+  - "Anthropic"
+  - "DeepMind"

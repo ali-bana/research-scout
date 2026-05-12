@@ -1,0 +1,8 @@
+# Edit paths if the repository lives somewhere else.
+SHELL=/bin/bash
+
+# Daily ingest, digest generation, and optional email at 06:00.
+0 6 * * * cd "$HOME/Desktop/codes/research-scout" && . ./env/bin/activate && research-radar run-all >> logs/cron.log 2>&1
+
+# Weekly discovery on Monday at 06:30.
+30 6 * * 1 cd "$HOME/Desktop/codes/research-scout" && . ./env/bin/activate && research-radar discover-weekly >> logs/cron.log 2>&1

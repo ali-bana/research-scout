@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Research Radar" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Research Radar</a>
+      {% if authenticated %}
+      <nav>
+        <a href="/digests/latest">Daily</a>
+        <a href="/weekly">Weekly</a>
+        <a href="/digests/history">History</a>
+        <a href="/papers">Papers</a>
+        <a href="/rss">RSS</a>
+        <a href="/notion">Notion</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/settings/profile">Profile</a>
+        <a href="/jobs">Jobs</a>
+      </nav>
+      <form method="post" action="/logout" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit" class="button secondary">Sign out</button>
+      </form>
+      {% endif %}
+    </header>
+
+    <main>
+      {% if flash %}
+      <div class="notice">{{ flash }}</div>
+      {% endif %}
+      {% for warning in warnings %}
+      <div class="warning">{{ warning.message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

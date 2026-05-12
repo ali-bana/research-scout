@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Job logs</h1>
+</section>
+<table>
+  <thead><tr><th>Started</th><th>Finished</th><th>Job</th><th>Status</th><th>Message</th></tr></thead>
+  <tbody>
+    {% for log in logs %}
+    <tr>
+      <td>{{ log.started_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+      <td>{{ log.finished_at.strftime("%Y-%m-%d %H:%M:%S") if log.finished_at else "" }}</td>
+      <td>{{ log.job_name }}</td>
+      <td>{{ log.status }}</td>
+      <td>{{ log.message }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

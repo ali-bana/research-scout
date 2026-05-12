@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Dashboard</h1>
+  <p>Local digest pipeline bound to {{ settings.app_host }}:{{ settings.app_port }}</p>
+</section>
+
+<section class="action-bar">
+  <form method="post" action="/actions/ingest">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="button" type="submit">Run ingest</button>
+  </form>
+  <form method="post" action="/actions/generate-daily">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="button" type="submit">Generate daily</button>
+  </form>
+  <form method="post" action="/actions/discover-weekly">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="button" type="submit">Generate weekly</button>
+  </form>
+  <form method="post" action="/actions/send-latest-email">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="button" type="submit">Send email</button>
+  </form>
+</section>
+
+<section class="metrics">
+  <div><strong>{{ counts.papers }}</strong><span>Papers</span></div>
+  <div><strong>{{ counts.rss }}</strong><span>RSS items</span></div>
+  <div><strong>{{ counts.digests }}</strong><span>Digests</span></div>
+  <div><strong>{{ counts.feedback }}</strong><span>Feedback labels</span></div>
+</section>
+
+<section class="grid two">
+  <article>
+    <h2>Latest daily</h2>
+    {% if latest_daily %}
+    <p><a href="/digests/{{ latest_daily.id }}">{{ latest_daily.title }}</a></p>
+    <p>{{ latest_daily.item_count }} selected paper(s)</p>
+    {% else %}
+    <p>No daily digest yet.</p>
+    {% endif %}
+  </article>
+  <article>
+    <h2>Weekly discovery</h2>
+    {% if latest_weekly %}
+    <p><a href="/digests/{{ latest_weekly.id }}">{{ latest_weekly.title }}</a></p>
+    <p>{{ latest_weekly.item_count }} selected paper(s)</p>
+    {% else %}
+    <p>No weekly discovery yet.</p>
+    {% endif %}
+  </article>
+</section>
+
+<section class="grid two">
+  <article>
+    <h2>Connectors</h2>
+    <p>{{ notion_status }}</p>
+    <p>{{ x_status.message }}</p>
+    <p>LLM provider: {{ settings.llm_provider }}</p>
+  </article>
+  <article>
+    <h2>Recent jobs</h2>
+    {% if jobs %}
+    <ul class="plain-list">
+      {% for job in jobs %}
+      <li><strong>{{ job.job_name }}</strong> {{ job.status }} <span>{{ job.message }}</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No jobs have run.</p>
+    {% endif %}
+  </article>
+</section>
+{% endblock %}

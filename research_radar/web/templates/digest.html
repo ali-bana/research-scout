@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>{{ title }}</h1>
+  {% if digest %}
+  <p>{{ digest.generated_at.strftime("%Y-%m-%d %H:%M") }} · {{ digest.item_count }} paper(s)</p>
+  {% endif %}
+</section>
+
+{% if not digest %}
+<p>No digest exists yet.</p>
+{% else %}
+<section class="digest-summary">
+  {{ digest.summary_html | safe }}
+</section>
+
+<section class="paper-list">
+  {% for item in digest.items %}
+  <article class="paper-card">
+    <div class="paper-meta">Rank {{ item.rank }} · Score {{ "%.2f"|format(item.score) }}</div>
+    <h2><a href="{{ item.paper.url }}" target="_blank" rel="noreferrer">{{ item.paper.title }}</a></h2>
+    <p class="authors">{{ item.paper.authors }}</p>
+    <p class="reason">{{ item.llm_selection_reason or item.selection_reason }}</p>
+    <p>{{ item.short_explanation }}</p>
+    <details>
+      <summary>Score breakdown</summary>
+      <pre>{{ item.score_breakdown }}</pre>
+    </details>
+    <details>
+      <summary>Abstract</summary>
+      <p>{{ item.paper.abstract }}</p>
+    </details>
+    <form method="post" action="/feedback/{{ item.id }}" class="feedback-row">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <button name="label" value="very_relevant" type="submit">Very relevant</button>
+      <button name="label" value="relevant" type="submit">Relevant</button>
+      <button name="label" value="not_relevant" type="submit">Not relevant</button>
+      <button name="label" value="already_knew" type="submit">Already knew</button>
+      <button name="label" value="read_later" type="submit">Read later</button>
+    </form>
+    <form method="post" action="/digest-items/{{ item.id }}/refresh-explanation" class="inline">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <button class="button secondary" type="submit">Refresh explanation</button>
+    </form>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+{% endblock %}

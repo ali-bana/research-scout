@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>RSS and news</h1>
+</section>
+<section class="paper-list">
+  {% for item in items %}
+  <article class="paper-card">
+    <div class="paper-meta">{{ item.source }} · {{ item.published_at.strftime("%Y-%m-%d") if item.published_at else "no date" }}</div>
+    <h2><a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.title }}</a></h2>
+    <p>{{ item.summary[:700] }}{% if item.summary|length > 700 %}...{% endif %}</p>
+  </article>
+  {% else %}
+  <p>No RSS items yet.</p>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Feedback</h1>
+</section>
+
+<section class="metrics">
+  {% for label, count in counts.items() %}
+  <div><strong>{{ count }}</strong><span>{{ label }}</span></div>
+  {% else %}
+  <div><strong>0</strong><span>No labels</span></div>
+  {% endfor %}
+</section>
+
+<section class="grid two">
+  <article>
+    <h2>Most boosted topics</h2>
+    <ul class="plain-list">
+      {% for term, count in boosted %}
+      <li>{{ term }} <span>{{ count }}</span></li>
+      {% else %}
+      <li>No boosted topics yet.</li>
+      {% endfor %}
+    </ul>
+  </article>
+  <article>
+    <h2>Most penalized topics</h2>
+    <ul class="plain-list">
+      {% for term, count in penalized %}
+      <li>{{ term }} <span>{{ count }}</span></li>
+      {% else %}
+      <li>No penalized topics yet.</li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+
+<section>
+  <h2>Recent labels</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Label</th><th>Paper</th></tr></thead>
+    <tbody>
+      {% for item in recent %}
+      <tr>
+        <td>{{ item.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+        <td>{{ item.label }}</td>
+        <td>{{ item.paper.title }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

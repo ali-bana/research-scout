@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Interest profile</h1>
+</section>
+{% if error %}<div class="warning">{{ error }}</div>{% endif %}
+<form method="post" action="/settings/profile" class="stack">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <textarea name="profile_text" rows="28" spellcheck="false">{{ profile_text }}</textarea>
+  <button class="button" type="submit">Save profile</button>
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Run Research Radar weekly discovery on Monday at 06:30
+
+[Timer]
+OnCalendar=Mon *-*-* 06:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Research Radar local runtime
+/data/
+/logs/
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Local model files and caches
+/models/
+*.gguf
+*.safetensors
+*.pt
+*.pth
+*.onnx

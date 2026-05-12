@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-heading">
+  <h1>Notion watchlist</h1>
+  <p>{{ status }}</p>
+</section>
+{% for snapshot in snapshots %}
+<article class="paper-card">
+  <div class="paper-meta">{{ snapshot.created_at.strftime("%Y-%m-%d %H:%M") }} · {{ snapshot.status }} · {{ snapshot.object_id }}</div>
+  <pre>{{ snapshot.text or "No text extracted." }}</pre>
+</article>
+{% else %}
+<p>No Notion snapshots stored.</p>
+{% endfor %}
+{% endblock %}

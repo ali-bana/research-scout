@@ -1,0 +1,273 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f8f5;
+  --panel: #ffffff;
+  --text: #1d2428;
+  --muted: #627077;
+  --line: #d9dfdc;
+  --accent: #1f6f68;
+  --accent-strong: #164f4a;
+  --warn: #8a4d00;
+  --warn-bg: #fff4d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 58px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.brand {
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+main {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 28px auto 56px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.page-heading p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.login-panel {
+  width: min(420px, 100%);
+  margin: 90px auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.stack {
+  display: grid;
+  gap: 12px;
+}
+
+.inline {
+  display: inline-flex;
+  margin: 0;
+}
+
+.action-bar,
+.feedback-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 16px 0 24px;
+}
+
+button,
+.button {
+  appearance: none;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+  background: var(--accent-strong);
+  text-decoration: none;
+}
+
+.secondary,
+.feedback-row button {
+  background: #fff;
+  color: var(--accent-strong);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+}
+
+textarea {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  min-height: 520px;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  width: min(560px, 100%);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 18px 0 24px;
+}
+
+.metrics div,
+article,
+.digest-summary {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.metrics strong {
+  display: block;
+  font-size: 28px;
+}
+
+.metrics span,
+.paper-meta,
+.authors {
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.grid.two {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.paper-list {
+  display: grid;
+  gap: 14px;
+}
+
+.paper-card h2 {
+  font-size: 19px;
+}
+
+.reason {
+  border-left: 4px solid var(--accent);
+  padding: 8px 0 8px 12px;
+  background: #eef7f4;
+  font-weight: 650;
+}
+
+.notice,
+.warning {
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.notice {
+  background: #e8f5ee;
+  border: 1px solid #b7d9c4;
+}
+
+.warning {
+  color: var(--warn);
+  background: var(--warn-bg);
+  border: 1px solid #ebcf91;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef2ef;
+}
+
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f1f3f1;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.plain-list {
+  padding-left: 18px;
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .page-heading,
+  .search {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .topbar {
+    padding: 14px 16px;
+  }
+}
